@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>Taifur's Notes</title>
+    <!-- Icon -->
+    <link
+      rel="icon"
+      href="https://e.top4top.io/p_2277h85e41.png"
+      type="image/x-icon"
+    />
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.11.2/css/all.css"
+    />
+    <!-- Google Fonts Roboto -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap"
+    />
+    <!-- MDB UI KIT -->
+    <link rel="stylesheet" href="css/mdb.min.css" />
+    <!-- Custom styles -->
+    <style>
+      
+      #myInput {
+  background-image: url('/css/searchicon.png'); /* Add a search icon to input */
+  background-position: 10px 12px; /* Position the search icon */
+  background-repeat: no-repeat; /* Do not repeat the icon image */
+  width: 100%; /* Full-width */
+  font-size: 16px; /* Increase font-size */
+  padding: 12px 20px 12px 40px; /* Add some padding */
+  border: 1px solid #ddd; /* Add a grey border */
+  margin-bottom: 12px; /* Add some space below the input */
+}
+
+    </style>
+  </head>
+
+  <body>
+    <!--Main Navigation-->
+    <header class="mb-10">
+      <!-- Navbar-->
+      <nav
+        class="navbar navbar-expand-lg navbar-light bg-white shadow-2 fixed-top"
+      >
+        <div
+          class="
+            container-fluid
+            justify-content-center justify-content-md-between
+          "
+        >
+          <!-- Left elements -->
+          <ul class="navbar-nav flex-row align-items-center">
+            <li class="nav-item me-3 me-lg-1">
+              <a
+                class="nav-link d-flex"
+                href="https://www.facebook.com/class.taifur/"
+                target="_blank"
+              >
+                <img
+                  src="taifur.png"
+                  height="31"
+                  alt=""
+                  loading="lazy"
+                  class="me-2"
+                />
+                <span
+                  style="
+                    font-size: 19px;
+                    font-weight: 500;
+                    color: hsl(0, 0%, 30%);
+                  "
+                  >Md Fatihul Islam <span class="text-theme">Taifur</span></span
+                >
+              </a>
+            </li>
+            <li class="nav-item me-3 me-lg-1">
+              <a
+                class="nav-link"
+                href="https://twitter.com/mdfatihulislam"
+                rel="nofollow"
+                target="_blank"
+              >
+                <span><i class="fab fa-twitter"></i></span>
+              </a>
+            </li>
+            <li class="nav-item me-3 me-lg-1">
+              <a
+                class="nav-link"
+                href="https://github.com/taifurislam"
+                rel="nofollow"
+                target="_blank"
+              >
+                <span><i class="fab fa-github"></i></span>
+              </a>
+            </li>
+          </ul>
+          <!-- Left elements -->
+
+          <!-- Center elements -->
+          <ul class="navbar-nav flex-row d-none d-md-flex">
+            <li class="nav-item me-3 me-lg-1">
+              <a
+                class="nav-link d-flex"
+                href="https://www.facebook.com/class.taifur/"
+                target="_blank"
+              >
+                <img
+                  src="taifur's notes.png"
+                  height="22"
+                  class="me-2"
+                  alt=""
+                />
+                <span>Taifur's Notes</span>
+              </a>
+            </li>
+          </ul>
+          <!-- Center elements -->
+
+          <!-- Right elements -->
+          <ul class="navbar-nav flex-row d-none d-md-flex">
+            <li class="nav-item me-3 me-lg-1">
+              <a
+                href="https://www.facebook.com/class.taifur"
+                target="_blank"
+                class="
+                  btn btn-primary btn-rounded
+                  mx-2
+                  d-none d-lg-inline-block
+                "
+                ><i class="fas fa-cubes me-2"></i>fb connect</a
+              >
+            </li>
+          </ul>
+          <!-- Right elements -->
+        </div>
+      </nav>
+      <!-- Navbar -->
+    </header>
+    <!--Main Navigation-->
+
+    <!--Main layout-->
+    <main>
+      <div class="container">
+
+        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for class or note..">
+        
+        <!-- Table -->
+        <table id="myTable" class="table table-hover table-striped">
+          <thead id="table-head"></thead>
+          <tbody id="table-body"></tbody>
+        </table>
+        <!-- Table -->
+      </div>
+    </main>
+    <!--Main layout-->
+
+    <!--Footer-->
+    <footer></footer>
+    <!--Footer-->
+  </body>
+
+  <!-- MDB ESSENTIAL -->
+  <script type="text/javascript" src="js/mdb.min.js"></script>
+  <!-- Google API -->
+  <script src="https://apis.google.com/js/api.js"></script>
+  <!-- easyData -->
+  <script type="text/javascript" src="js/easyData-google-sheets.js"></script>
+
+  <!-- easyData - Creating table -->
+  <script>
+    {
+      {
+        // Your API KEY
+        const API_KEY = "AIzaSyC5GuHcIzEmHKRJn3ZcfyFr0I0A2vlr5Bs";
+
+        function displayResult2(response) {
+          let tableHead = "";
+          let tableBody = "";
+
+          response.result.values.forEach((row, index) => {
+            if (index === 0) {
+              tableHead += "<tr>";
+              row.forEach((val) => (tableHead += "<th>" + val + "</th>"));
+              tableHead += "</tr>";
+            } else {
+              tableBody += "<tr>";
+              row.forEach((val) => (tableBody += "<td>" + val + "</td>"));
+              tableBody += "</tr>";
+            }
+          });
+
+          document.getElementById("table-head").innerHTML = tableHead;
+          document.getElementById("table-body").innerHTML = tableBody;
+        }
+
+        function loadData() {
+          // Spreadsheet ID
+          const spreadsheetId = "1K8kNZAhoBnRCrVz5f2pAm-WEwH--FlGI18fNLoUqeg4";
+          const range = "A:Z";
+          getPublicValues({ spreadsheetId, range }, displayResult2);
+        }
+
+        window.addEventListener("load", (e) => {
+          initOAuthClient({ apiKey: API_KEY });
+        });
+
+        document.addEventListener("gapi-loaded", (e) => {
+          loadData();
+        });
+      }
+    }
+
+function myFunction() {
+  // Declare variables
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+
+  // Loop through all table rows, and hide those who don't match the search query
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+}
+
+  </script>
+</html>
